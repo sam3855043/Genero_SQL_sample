@@ -21,7 +21,8 @@ MAIN
 
     DEFINE ls_sql STRING
     DEFINE i,n INTEGER
-
+    DEFINE var1 CHAR(20)
+    DEFINE var2 INTEGER
 
     CONNECT TO "/u1/usr/tiptop/logd_test/Webserver_info.db+driver='dbmsqt'"
     TRY 
@@ -104,6 +105,19 @@ MAIN
     PREPARE s1 FROM "DELETE FROM books WHERE id=?"
     EXECUTE s1 USING n
     FREE s1
+
+    PREPARE s1 FROM "UPDATE tab SET col=? WHERE key=?"
+    LET var1 = "aaaa"
+    LET var2 = 345
+    EXECUTE s1 USING var1, var2
+
+    PREPARE s2 FROM "SELECT col FROM tab WHERE key=?"
+    LET var2 = 564
+    EXECUTE s2 USING var2 INTO var1
+
+    PREPARE s3 FROM "CALL myproc(?,?)"
+    LET var1 = 'abc'
+    EXECUTE s3 USING var1 IN, var2 OUT
 
 
 END MAIN
