@@ -106,13 +106,15 @@ MAIN
     EXECUTE s1 USING n
     FREE s1
 
-    PREPARE s1 FROM "UPDATE tab SET col=? WHERE key=?"
+
+    #https://4js.com/online_documentation/fjs-fgl-manual-html/#fgl-topics/c_fgl_DynamicSql_EXECUTE.html
+    PREPARE s1 FROM "UPDATE books SET title=? WHERE id=?"
     LET var1 = "aaaa"
-    LET var2 = 345
+    LET var2 = 2
     EXECUTE s1 USING var1, var2
 
-    PREPARE s2 FROM "SELECT col FROM tab WHERE key=?"
-    LET var2 = 564
+    PREPARE s2 FROM "SELECT title FROM tab WHERE id=?"
+    LET var2 = 2
     EXECUTE s2 USING var2 INTO var1
 
     PREPARE s3 FROM "CALL myproc(?,?)"
