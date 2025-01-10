@@ -24,7 +24,7 @@ MAIN
     DEFINE var1 CHAR(20)
     DEFINE var2 INTEGER
 
-    CONNECT TO "/u1/usr/tiptop/logd_test/Webserver_info.db+driver='dbmsqt'"
+    CONNECT TO "./Webserver_info.db+driver='dbmsqt'"
     TRY 
         DROP TABLE CoffeeProducts
     CATCH
@@ -108,18 +108,18 @@ MAIN
 
 
     #https://4js.com/online_documentation/fjs-fgl-manual-html/#fgl-topics/c_fgl_DynamicSql_EXECUTE.html
-    PREPARE s1 FROM "UPDATE books SET title=? WHERE id=?"
+    PREPARE s2 FROM "UPDATE books SET title=? WHERE id=?"
     LET var1 = "aaaa"
     LET var2 = 2
-    EXECUTE s1 USING var1, var2
+    EXECUTE s2 USING var1, var2
 
-    PREPARE s2 FROM "SELECT title FROM tab WHERE id=?"
+    PREPARE s3 FROM "SELECT title FROM books WHERE id=?"
     LET var2 = 2
-    EXECUTE s2 USING var2 INTO var1
+    EXECUTE s3 USING var2 INTO var1
 
-    PREPARE s3 FROM "CALL myproc(?,?)"
-    LET var1 = 'abc'
-    EXECUTE s3 USING var1 IN, var2 OUT
+    #PREPARE s4 FROM "CALL myproc(?,?)"
+    #LET var1 = 'abc'
+    #EXECUTE s4 USING var1 IN, var2 OUT
 
     #https://4js.com/online_documentation/fjs-fgl-manual-html/#fgl-topics/c_fgl_result_sets_FETCH.html
     #FETCH example
@@ -129,8 +129,8 @@ MAIN
     FETCH LAST c1 INTO books[2].* 
     FETCH PREVIOUS c1 INTO  books[3].* 
     FETCH FIRST c1 INTO books[4].*
-    FETCH LAST books[5].* -- INTO clause is optional
-    FETCH FIRST books[5].* -- INTO clause is optional
+    FETCH LAST c1 -- INTO clause is optional
+    FETCH FIRST c1 -- INTO clause is optional
     CLOSE c1
 
 
