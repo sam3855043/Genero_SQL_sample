@@ -121,5 +121,17 @@ MAIN
     LET var1 = 'abc'
     EXECUTE s3 USING var1 IN, var2 OUT
 
+    #https://4js.com/online_documentation/fjs-fgl-manual-html/#fgl-topics/c_fgl_result_sets_FETCH.html
+    #FETCH example
+    DECLARE c1 SCROLL CURSOR FOR SELECT id, title,description from books 
+    OPEN c1
+    FETCH c1 INTO books[1].*
+    FETCH LAST c1 INTO books[2].* 
+    FETCH PREVIOUS c1 INTO  books[3].* 
+    FETCH FIRST c1 INTO books[4].*
+    FETCH LAST books[5].* -- INTO clause is optional
+    FETCH FIRST books[5].* -- INTO clause is optional
+    CLOSE c1
+
 
 END MAIN
